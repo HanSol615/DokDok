@@ -6,3 +6,14 @@ export interface Book {
     readStatus: boolean;
     isbn: string;
 };
+
+export interface BookDetail {
+    bookTitle: string;
+    bookAuthor: string;
+    bookImage: string;
+    bookStartDate: string;
+    bookEndDate: string;
+    bookRemind: string[];
+    bookReview: string;
+    bookScore: number;
+};
