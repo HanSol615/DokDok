@@ -55,4 +55,9 @@ export const GlobalStyle = createGlobalStyle`
         box-shadow: 0 0px 1px hsla(0, 0%, 0%, 0.4);
         transform: translateY(1px);
     }
+
+    a {
+        text-decoration: none;
+        color: inherit;
+    }
 `
