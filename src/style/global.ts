@@ -1,16 +1,33 @@
 import { createGlobalStyle } from "styled-components";
 
 export const GlobalStyle = createGlobalStyle`
+    @font-face {
+        font-family: 'Pretendard-Regular';
+        src: url('https://fastly.jsdelivr.net/gh/Project-Noonnu/noonfonts_2107@1.1/Pretendard-Regular.woff') format('woff');
+        font-weight: 400;
+        font-style: normal;
+    }
+
+    @font-face {
+        font-family: 'MaruBuri';
+        src: url(https://hangeul.pstatic.net/hangeul_static/webfont/MaruBuri/MaruBuri-Regular.eot);
+        src: url(https://hangeul.pstatic.net/hangeul_static/webfont/MaruBuri/MaruBuri-Regular.eot?#iefix) format("embedded-opentype"), url(https://hangeul.pstatic.net/hangeul_static/webfont/MaruBuri/MaruBuri-Regular.woff2) format("woff2"), url(https://hangeul.pstatic.net/hangeul_static/webfont/MaruBuri/MaruBuri-Regular.woff) format("woff"), url(https://hangeul.pstatic.net/hangeul_static/webfont/MaruBuri/MaruBuri-Regular.ttf) format("truetype");
+    }
+
     html {
-    box-sizing: border-box;
+        box-sizing: border-box;
+    }
+
+    * {
+        font-family: 'Pretendard-Regular', sans-serif;
     }
 
     body {
-    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", "Roboto", "Oxygen",
-        "Ubuntu", "Cantarell", "Fira Sans", "Droid Sans", "Helvetica Neue",
-        sans-serif;
-    -webkit-font-smoothing: antialiased;
-    -moz-osx-font-smoothing: grayscale;
+        font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", "Roboto", "Oxygen",
+            "Ubuntu", "Cantarell", "Fira Sans", "Droid Sans", "Helvetica Neue",
+            sans-serif;
+        -webkit-font-smoothing: antialiased;
+        -moz-osx-font-smoothing: grayscale;
     }
 
     html,
@@ -30,7 +47,6 @@ export const GlobalStyle = createGlobalStyle`
     input,
     button {
         font-size: 1rem;
-        font-family: inherit;
         border: none;
         border-radius: 8px;
         padding: 0.5rem 0.75rem;
