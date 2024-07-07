@@ -7,6 +7,8 @@ import Login from './pages/Login';
 import Join from './pages/Join';
 import ResetPwd from './pages/ResetPwd';
 import BookDetail from './pages/BookDetail';
+import { ThemeProvider } from 'styled-components';
+import { theme } from './style/theme';
 
 const router = createBrowserRouter([
   {
@@ -47,10 +49,10 @@ const router = createBrowserRouter([
 
 const App = () => {
   return (
-    <>
+    <ThemeProvider theme={theme}>
       <GlobalStyle />
       <RouterProvider router={router} />
-    </>
+    </ThemeProvider>
   );
 };
 
