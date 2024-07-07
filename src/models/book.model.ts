@@ -17,3 +17,14 @@ export interface BookDetail {
     bookReview: string;
     bookScore: number;
 };
+
+export interface BookRemind {
+    isbn: string;
+    context: string;
+};
+
+export interface BookReview {
+    isbn: string;
+    context: string;
+    score: number;
+};
