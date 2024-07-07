@@ -29,3 +29,17 @@ export interface BookReview {
     context: string;
     score: number;
 };
+
+export interface BookFinished {
+    title: string;
+    author: string;
+    endDate: string;
+    image: string;
+    isbn: string;
+};
+
+export interface BookFinishedResult {
+    bookFinished: BookFinished[];
+    bookReadCount: number;
+    bookFinishCount: number;
+};
