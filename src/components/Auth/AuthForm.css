@@ -29,6 +29,17 @@
   flex-direction: column;
 }
 
+.link-container{
+  display: flex;
+  gap: 60px;
+  margin-top: 15px;
+}
+
+.logo-container img{
+  width: 200px;
+  height: 200px;
+}
+
 .reset-pwd-form{
   display: inline-flex;
   flex-direction: column;

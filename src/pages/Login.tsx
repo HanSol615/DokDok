@@ -1,10 +1,11 @@
-// src/pages/Login.tsx
-
 import React, { useState } from 'react';
-import { useNavigate } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import AuthForm from '../components/Auth/AuthForm';
 import AuthInput from '../components/Auth/AuthInput';
 import '../components/Auth/AuthForm.css';
+import logoImg from '../assets/logoImg/logo1.jpg'
+import { login } from '../api/Auth'; // login 함수 가져오기
+import { styled } from 'styled-components';
 
 const Login: React.FC = () => {
   const [email, setEmail] = useState('');
@@ -16,33 +17,13 @@ const Login: React.FC = () => {
   const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
 
-    const url = 'http://localhost:8888/auth/login';
     const data = {
       email,
       password
     };
 
     try {
-      const response = await fetch(url, {
-        method: 'POST',
-        headers: {
-          'Content-Type': 'application/json',
-        },
-        body: JSON.stringify(data),
-      });
-
-      const responseData = await response.json();
-
-      if (!response.ok) {
-        // 클라이언트 오류 처리
-        if (response.status === 400 || response.status === 401) {
-          alert(responseData.message);
-        } else {
-          // 기타 클라이언트 오류 처리
-          alert('서버 응답 실패');
-        }
-        return;
-      }
+      const responseData = await login(data);
 
       console.log('로그인 성공:', responseData);
       alert(`환영합니다, ${responseData.nickname}님!`);
@@ -55,14 +36,22 @@ const Login: React.FC = () => {
       // 로그인 성공 후 홈페이지로 이동
       navigate('/mybooks');
 
-    } catch (error) {
+    } catch (error: any) {
       console.error('로그인 에러:', error);
-      alert('로그인에 실패했습니다. 다시 시도해주세요.');
+      if (error.response && error.response.data && error.response.data.message) {
+        alert(error.response.data.message);
+      } else {
+        alert('로그인에 실패했습니다. 다시 시도해주세요.');
+      }
     }
   };
 
   return (
     <AuthForm title="로그인">
+      <LoginStyle>
+      <div className="logo-container">
+        <img src={logoImg} alt="Logo" className="auth-logo" />
+      </div>
       <form className="login-form" onSubmit={handleSubmit}>
         <AuthInput
           type="email"
@@ -78,11 +67,22 @@ const Login: React.FC = () => {
           onChange={(e) => setPassword(e.target.value)}
           required
         />
+        <div className="link-container">
+            <Link to="/auth/join">회원가입</Link>
+            <Link to="/auth/resetPwd">비밀번호 변경</Link>
+        </div>
         {error && <div className="error-message">{error}</div>}
         <button type="submit">로그인</button>
       </form>
+      </LoginStyle>
     </AuthForm>
   );
 };
 
 export default Login;
+
+const LoginStyle = styled.div`
+    display: flex;
+    align-items: center;
+    gap: 80px;
+`;
