@@ -1,5 +1,5 @@
 import axios, { AxiosRequestConfig, AxiosResponse } from 'axios';
-import { getToken } from '../store/authStore';
+import { getToken, removeToken } from '../store/authStore';
 
 const BASE_URL = 'https://port-0-docktori-server-ly5qmhc1cd365acd.sel5.cloudtype.app';
 const DEFAULT_TIMEOUT = 30000;
@@ -10,7 +10,7 @@ export const createClient = (config?: AxiosRequestConfig) => {
         timeout: DEFAULT_TIMEOUT,
         headers: {
             "Content-Type": "application/json",
-            "Authorization": getToken() || '',
+            "Authorization": getToken() ? getToken() : '',
         },
         withCredentials: true,
         ...config,
@@ -20,8 +20,8 @@ export const createClient = (config?: AxiosRequestConfig) => {
         (response: AxiosResponse) => response,
         (error) => {
             if (error.response && error.response.status === 401) {
-                // removeToken();
-                window.location.href = '/login';
+                removeToken();
+                window.location.href = 'auth/login';
             }
             return Promise.reject(error);
         }
