@@ -31,17 +31,17 @@ export const theme: Theme = {
             fontSize: '1.5rem'
         },
         small: {
-            fontSize: '0.9rem'
+            fontSize: '1.1rem'
         }
     },
     button: {
         medium: {
             fontSize: '1rem',
-            padding: '0.5rem 1rem'
+            padding: '0.5rem 0.8rem'
         },
         small: {
-            fontSize: '0.75rem',
-            padding: '0.35rem 0.6rem'
+            fontSize: '1.1rem',
+            padding: '0.4rem 0.7rem'
         }
     },
     buttonScheme: {
