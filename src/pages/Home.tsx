@@ -60,11 +60,12 @@ export default function Home() {
 
 const HomeStyle = styled.div`
     display: flex;
+    width: 100vw;
     height: 100vh;
 
     #sidebar {
     width: 22rem;
-    background-color: #f7f7f7;
+    background-color: #CAF0F8;
     border-right: solid 1px #e3e3e3;
     display: flex;
     flex-direction: column;
@@ -100,7 +101,7 @@ const HomeStyle = styled.div`
         gap: 0.5rem;
         padding-top: 1rem;
         padding-bottom: 1rem;
-        border-bottom: 1px solid #e3e3e3;
+        border-bottom: 1px solid #b3b3b37d;
     }
 
     #sidebar>div form {
@@ -168,7 +169,7 @@ const HomeStyle = styled.div`
     }   
 
     #sidebar nav p:hover {
-        background: #e3e3e3;
+        background: #ADE8F4;
     }
 
     #sidebar img {
@@ -178,6 +179,7 @@ const HomeStyle = styled.div`
 
     #detail {
         flex: 1;
-        margin: 12px 20px;
+        margin: 50px 90px;
+        box-sizing: border-box;
     }
 `
