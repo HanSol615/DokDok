@@ -6,57 +6,19 @@ interface Props {
     books: Book[];
 }
 
-const Booklist = () => {
-    const books = [
-        {
-            title: '잭과 콩나무',
-            author: '박엄지',
-            isbn: '1',
-            image: '',
-            likeStatus: true,
-            readStatus: false,
-        },
-        {
-            title: '잭과 콩나무',
-            author: '박엄지',
-            isbn: '2',
-            image: '',
-            likeStatus: true,
-            readStatus: false,
-        }, 
-        {
-            title: '잭과 콩나무',
-            author: '박엄지',
-            isbn: '3',
-            image: '',
-            likeStatus: true,
-            readStatus: false,
-        },
-        {
-            title: '잭과 콩나무',
-            author: '박엄지',
-            isbn: '4',
-            image: '',
-            likeStatus: true,
-            readStatus: false,
-        },
-        {
-            title: '잭과 콩나무',
-            author: '박엄지',
-            isbn: '5',
-            image: '',
-            likeStatus: true,
-            readStatus: false,
-        },
-    ]
+const Booklist = ({ books = [] }: Props) => {
+    if (!Array.isArray(books)) {
+        console.error('books is not an array:', books);
+        return null;
+    }
 
     return (
         <BooklistStyle>
-            {books?.map((item) => (
-                <BookItem key={item.isbn} book={item}/>
+            {books.map((item) => (
+                <BookItem key={item.isbn} book={item} />
             ))}
         </BooklistStyle>
-    )
+    );
 };
 
 const BooklistStyle = styled.div`
