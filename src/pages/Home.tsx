@@ -13,6 +13,14 @@ export default function Home() {
         navigate('/calendar');
     };
 
+    const handleNavigateToJoin = () => {
+        navigate('/auth/join');
+    };
+
+    const handleNavigateToLogin = () => {
+        navigate('/auth/login');
+    };
+
     return (
         <HomeStyle>
             <div id="sidebar">
@@ -47,8 +55,13 @@ export default function Home() {
                         <li>
                             <p onClick={handleNavigateToDokDokCalendar}>독독 캘린더</p>
                         </li>
+                        
                     </ul>
                 </nav>
+                <div>
+                    <p onClick={handleNavigateToJoin}>회원 가입</p>
+                    <p onClick={handleNavigateToLogin}>로그인</p>
+                </div>
                 {/* <img src={logo2} alt="DokDok" /> */}
             </div>
             <div id="detail">

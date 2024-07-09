@@ -34,15 +34,15 @@ const router = createBrowserRouter([
     ],
   },
   {
-    path: '/login',
+    path: 'auth/login',
     element: <Login />,
   },
   {
-    path: '/join',
+    path: 'auth/join',
     element: <Join />,
   },
   {
-    path: '/resetPwd',
+    path: 'auth/resetPwd',
     element: <ResetPwd />,
   }
 ]);
