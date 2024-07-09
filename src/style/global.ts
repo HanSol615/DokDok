@@ -4,7 +4,7 @@ export const GlobalStyle = createGlobalStyle`
     @font-face {
         font-family: 'Pretendard-Regular';
         src: url('https://fastly.jsdelivr.net/gh/Project-Noonnu/noonfonts_2107@1.1/Pretendard-Regular.woff') format('woff');
-        font-weight: 400;
+        font-weight: 300;
         font-style: normal;
     }
 
@@ -14,12 +14,30 @@ export const GlobalStyle = createGlobalStyle`
         src: url(https://hangeul.pstatic.net/hangeul_static/webfont/MaruBuri/MaruBuri-Regular.eot?#iefix) format("embedded-opentype"), url(https://hangeul.pstatic.net/hangeul_static/webfont/MaruBuri/MaruBuri-Regular.woff2) format("woff2"), url(https://hangeul.pstatic.net/hangeul_static/webfont/MaruBuri/MaruBuri-Regular.woff) format("woff"), url(https://hangeul.pstatic.net/hangeul_static/webfont/MaruBuri/MaruBuri-Regular.ttf) format("truetype");
     }
 
-    html {
-        box-sizing: border-box;
+    @font-face {
+        font-family: 'SunBatang-Light';
+        src: url('https://fastly.jsdelivr.net/gh/projectnoonnu/noonfonts_eight@1.0/SunBatang-Light.woff') format('woff');
+        font-weight: normal;
+        font-style: normal;
     }
 
+    @font-face {
+        font-family: 'MinSans-Regular';
+        src: url('https://fastly.jsdelivr.net/gh/projectnoonnu/noonfonts_2201-2@1.0/MinSans-Regular.woff') format('woff');
+        font-weight: normal;
+        font-style: normal;
+    }
+
+    @font-face {
+    font-family: 'MapoFlowerIsland';
+    src: url('https://fastly.jsdelivr.net/gh/projectnoonnu/noonfonts_2001@1.1/MapoFlowerIslandA.woff') format('woff');
+    font-weight: normal;
+    font-style: normal;
+}
+
     * {
-        font-family: 'Pretendard-Regular', sans-serif;
+        box-sizing: border-box;
+        font-family: 'MapoFlowerIsland', sans-serif;
     }
 
     body {
@@ -57,7 +75,7 @@ export const GlobalStyle = createGlobalStyle`
     }
 
     button {
-        color: #3992ff;
+        color: #0077B6;
         font-weight: 500;
     }
 
