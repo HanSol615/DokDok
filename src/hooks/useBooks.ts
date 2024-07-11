@@ -1,17 +1,47 @@
 import { useEffect, useState } from "react"
-import { Book } from "../models/model"
-import { getFavoriteBooks, getFinishedBooks, getReadingBooks } from "../api/books.api";
+import { Book, BooksResponse } from "../models/model"
+import { addBookFavorite, addBookFinished, addBookReading, getFavoriteBooks, getFinishedBooks, getReadingBooks } from "../api/books.api";
 
 export const useBooks = () => {
     const [favoriteBooks, setFavoriteBooks] = useState<Book[]>([]);
+    const [favoriteBooksCount, setFavoriteBooksCount] = useState<number>(0);
     const [readingBooks, setReadingBooks] = useState<Book[]>([]);
+    const [readingBooksCount, setReadingBooksCount] = useState<number>(0);
     const [finishedBooks, setFinishedBooks] = useState<Book[]>([]);
+    const [finishedBooksCount, setFinishedBooksCount] = useState<number>(0);
 
     useEffect(() => {
-        getFavoriteBooks().then((books) => {setFavoriteBooks(books)});
-        getReadingBooks().then((books) => {setReadingBooks(books)});
-        getFinishedBooks().then((books) => {setFinishedBooks(books)});
-    }, [])
+        getFavoriteBooks().then((response) => {
+            setFavoriteBooks(response.books);
+            setFavoriteBooksCount(response.count);
+        });
+        getReadingBooks().then((response) => {
+            setReadingBooks(response.books);
+            setReadingBooksCount(response.count);
+        });
+        getFinishedBooks().then((response) => {
+            setFinishedBooks(response.books);
+            setFinishedBooksCount(response.count);
+        });
+    }, []);
 
-    return { favoriteBooks, readingBooks, finishedBooks };
-}
+    const addFavorite = (isbn: string) => {
+        addBookFavorite(isbn).then(() => {
+            alert('즐겨찾기에 추가되었습니다.')
+        })
+    };
+
+    const addReading = (book: Book) => {
+        addBookReading(book).then(() => {
+            alert('읽는 중 책에 추가되었습니다.');
+        });
+    };
+
+    const addFinished = (isbn: string) => {
+        addBookFinished(isbn).then(() => {
+            alert('읽은 책에 추가되었습니다.');
+        });
+    };
+
+    return { favoriteBooks, favoriteBooksCount, readingBooks, readingBooksCount, finishedBooks, finishedBooksCount, addFavorite, addReading, addFinished };
+};
