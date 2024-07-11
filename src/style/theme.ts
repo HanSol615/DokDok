@@ -40,7 +40,7 @@ export const theme: Theme = {
             padding: '0.5rem 0.8rem'
         },
         small: {
-            fontSize: '1.1rem',
+            fontSize: '1rem',
             padding: '0.4rem 0.7rem'
         }
     },
