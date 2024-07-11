@@ -23,6 +23,8 @@ const ButtonStyle = styled.button<Omit<Props, "children">> `
     opacity: ${({ disabled }) => (disabled ? 0.5 : 1)};
     pointer-events: ${({ disabled }) => (disabled ? 'none' : 'auto')};
     cursor: ${({ disabled }) => (disabled ? 'none' : 'pointer')};
+    border: none;
+    border-radius: 5px;
 `
 
 export default Button;
