@@ -8,6 +8,11 @@ export interface Book {
     readStatus?: boolean;
 };
 
+export interface BooksResponse {
+    count: number;
+    books: Book[];
+};
+
 export interface BookDetail {
     bookTitle: string;
     bookAuthor: string;
