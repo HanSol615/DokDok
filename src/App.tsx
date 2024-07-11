@@ -9,6 +9,7 @@ import ResetPwd from './pages/ResetPwd';
 import BookDetail from './pages/BookDetail';
 import { ThemeProvider } from 'styled-components';
 import { theme } from './style/theme';
+import SearchResults from './pages/SearchResults';
 
 const router = createBrowserRouter([
   {
@@ -24,7 +25,11 @@ const router = createBrowserRouter([
         element: <MyBooks />,
       },
       {
-        path: 'book/:id',
+        path: 'search',
+        element: <SearchResults />,
+      },
+      {
+        path: 'books/:id',
         element: <BookDetail />
       },
       {
