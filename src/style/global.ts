@@ -62,8 +62,8 @@ export const GlobalStyle = createGlobalStyle`
     }
 
     textarea,
-    input,
-    button {
+    input
+    {
         font-size: 1rem;
         border: none;
         border-radius: 8px;
@@ -72,11 +72,6 @@ export const GlobalStyle = createGlobalStyle`
         background-color: white;
         line-height: 1.5;
         margin: 0;
-    }
-
-    button {
-        color: #0077B6;
-        font-weight: 500;
     }
 
     textarea:hover,
