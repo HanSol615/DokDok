@@ -1,9 +1,10 @@
 import styled from "styled-components";
 import { Book } from "../../models/model";
 import { Link } from 'react-router-dom';
-import { FaHeart } from 'react-icons/fa';
+import { FaHeart, FaRegHeart, FaStar, FaRegStar } from 'react-icons/fa';
 import Button from "../common/Button";
 import { useBooks } from "../../hooks/useBooks";
+import { useState } from "react";
 
 interface Props {
     book: Book;
@@ -21,10 +22,28 @@ const truncateText = (text: string, maxLength: number) => {
 };
 
 const BookItem = ({ book, isFavoriteTab }: Props) => {
+    const [likeStatus, setLikeStatus] = useState(book.likeStatus);
     const truncatedTitle = truncateText(book.title, MAX_TITLE_LENGTH);
     const { addFavorite, addReading, addFinished } = useBooks();
 
-    const handleFavoriteClick = () => {
+    const renderStars = (score: number) => {
+        const stars = [];
+    
+        for (let i = 0; i < 5; i++) {
+            if (i < score) {
+                stars.push(<FaStar key={i} className="filled-star" />);
+            } else {
+                stars.push(<FaStar key={i} className="empty-star" />);
+            }
+        }
+    
+        return stars;
+    };
+
+    const handleFavoriteClick = (event: React.MouseEvent<SVGElement>) => {
+        event.stopPropagation();
+        event.preventDefault();
+        setLikeStatus(!likeStatus);
         addFavorite(book.isbn);
     };
 
@@ -61,10 +80,16 @@ const BookItem = ({ book, isFavoriteTab }: Props) => {
                                     읽기 완료
                                 </Button>
                             ) : (
-                                <div>평점</div>
+                                <div className="rating">
+                                    {renderStars(book.score ?? 0)}
+                                </div>
                             )
                         )}
-                        <FaHeart onClick={handleFavoriteClick}/>
+                        {likeStatus ? (
+                            <FaHeart onClick={handleFavoriteClick} />
+                        ) : (
+                            <FaRegHeart onClick={handleFavoriteClick} />
+                        )}
                     </div>
                 </div>
             </BookItemStyle>
@@ -109,10 +134,22 @@ const BookItemStyle = styled.div`
         display: flex;
         gap: 20px;
         align-items: center;
+        margin: 0;
 
         svg {
             font-size: 1.3rem;
             fill: red;
+        }
+
+        .rating {
+            margin-top: 0.4rem;
+            .filled-star {
+                fill: yellow;
+            }
+
+            .empty-star {
+                fill: #d6d6d6c3;
+            }
         }
     }
 `

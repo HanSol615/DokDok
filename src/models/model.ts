@@ -6,6 +6,7 @@ export interface Book {
     publisher?: string;
     likeStatus?: boolean;
     readStatus?: boolean;
+    score?: number;
 };
 
 export interface BooksResponse {
