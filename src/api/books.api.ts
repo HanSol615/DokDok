@@ -28,7 +28,7 @@ export const searchBooks = async ({ title }: SearchBooksParams) => {
 };
 
 export const addBookFavorite = async (isbn: string) => {
-    const response = await httpClient.post('/book/like');
+    const response = await httpClient.post('/book/like', { isbn });
     return response.data;
 };
 

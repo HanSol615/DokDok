@@ -25,10 +25,13 @@ export const useBooks = () => {
         });
     }, []);
 
-    const addFavorite = (isbn: string) => {
-        addBookFavorite(isbn).then(() => {
-            alert('즐겨찾기에 추가되었습니다.')
-        })
+    const addFavorite = async (isbn: string) => {
+        const response = await addBookFavorite(isbn);
+        if (response.bookLikeStatus) {
+            alert('즐겨찾기에 추가되었습니다.');
+        } else {
+            alert('즐겨찾기에서 제거되었습니다.');
+        }
     };
 
     const addReading = (book: Book) => {
