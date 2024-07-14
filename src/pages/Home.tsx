@@ -91,7 +91,9 @@ export default function Home() {
 const HomeStyle = styled.div`
     display: flex;
     width: 100vw;
-    height: 100vh;
+    max-width: 100%;
+    min-height: 100vh;
+    height: auto;
 
     #sidebar {
     width: 22rem;
