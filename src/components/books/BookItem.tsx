@@ -21,24 +21,24 @@ const truncateText = (text: string, maxLength: number) => {
     }
 };
 
+export const renderStars = (score: number) => {
+    const stars = [];
+
+    for (let i = 0; i < 5; i++) {
+        if (i < score) {
+            stars.push(<FaStar key={i} className="filled-star" />);
+        } else {
+            stars.push(<FaStar key={i} className="empty-star" />);
+        }
+    }
+
+    return stars;
+};
+
 const BookItem = ({ book, isFavoriteTab }: Props) => {
     const [likeStatus, setLikeStatus] = useState(book.likeStatus);
     const truncatedTitle = truncateText(book.title, MAX_TITLE_LENGTH);
     const { addFavorite, addReading, addFinished } = useBooks();
-
-    const renderStars = (score: number) => {
-        const stars = [];
-    
-        for (let i = 0; i < 5; i++) {
-            if (i < score) {
-                stars.push(<FaStar key={i} className="filled-star" />);
-            } else {
-                stars.push(<FaStar key={i} className="empty-star" />);
-            }
-        }
-    
-        return stars;
-    };
 
     const handleFavoriteClick = (event: React.MouseEvent<SVGElement>) => {
         event.stopPropagation();

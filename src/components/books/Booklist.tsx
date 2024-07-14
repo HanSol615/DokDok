@@ -1,5 +1,5 @@
 import styled from "styled-components";
-import { Book, BooksResponse } from "../../models/model";
+import { Book } from "../../models/model";
 import BookItem from "./BookItem";
 
 interface Props {
