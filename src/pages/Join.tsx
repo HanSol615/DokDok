@@ -2,8 +2,7 @@ import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import AuthForm from '../components/Auth/AuthForm';
 import AuthInput from '../components/Auth/AuthInput';
-import '../components/Auth/AuthForm.css';
-import { signup } from '../api/Auth'; // signup 함수 가져오기
+import { join } from '../api/Auth'; // signup 함수 가져오기
 
 const Join: React.FC = () => {
   const [email, setEmail] = useState('');
@@ -30,7 +29,7 @@ const Join: React.FC = () => {
     };
 
     try {
-      const responseData = await signup(data);
+      const responseData = await join(data);
 
       console.log('회원가입 성공:', responseData);
       alert('회원가입 성공!');
@@ -77,7 +76,7 @@ const Join: React.FC = () => {
           onChange={(e) => setNickname(e.target.value)}
           required
         />
-        <button type="submit">회원가입</button>
+        <button id="auth-btn" type="submit">회원가입</button>
       </form>
     </AuthForm>
   );

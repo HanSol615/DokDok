@@ -1,42 +1,34 @@
-import axios from 'axios';
+import axiosInstance from './Axios';
 
-const baseUrl = 'https://port-0-docktori-server-ly5qmhc1cd365acd.sel5.cloudtype.app'; // 서버 포트 설정
-
-// 회원가입 요청을 보내는 함수
-export const signup = async (userData: UserData) => {
+// 회원가입 요청
+export const join = async (userData: UserData) => {
   try {
-    const response = await axios.post(`${baseUrl}/auth/join`, userData);
+    const response = await axiosInstance.post('/auth/join', userData);
     return response.data;
   } catch (error) {
     throw error;
   }
 };
 
-// 로그인 요청을 보내는 함수
+// 로그인 요청
 export const login = async (loginData: LoginData) => {
   try {
-    const response = await axios.post(`${baseUrl}/auth/login`, loginData);
+    const response = await axiosInstance.post('/auth/login', loginData);
     return response.data;
   } catch (error) {
     throw error;
   }
 };
 
-// 비밀번호 변경 요청을 보내는 함수
-export const resetPwd = async (accessToken: string, newpassword1: string, newpassword2: string) => {
-  const url = `${baseUrl}/auth/password`;
+// 비밀번호 변경 요청
+export const resetPwd = async (accessToken: string, resetPwdData: ResetPwdData) => {
+  const url = '/auth/password';
   const headers = {
-    'Content-Type': 'application/json',
     'Authorization': `${accessToken}`
   };
 
-  const data = {
-    newpassword1,
-    newpassword2,
-  };
-
   try {
-    const response = await axios.patch(url, data, { headers });
+    const response = await axiosInstance.patch(url, resetPwdData, { headers });
     return response.data;
   } catch (error) {
     throw error;
@@ -55,8 +47,13 @@ interface LoginData {
   password: string;
 }
 
+interface ResetPwdData {
+  newpassword1: string;
+  newpassword2: string;
+}
+
 export default {
-  signup,
+  join,
   login,
   resetPwd,
 };

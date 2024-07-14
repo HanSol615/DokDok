@@ -12,6 +12,11 @@ const ResetPwd: React.FC = () => {
   const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
 
+    const data = {
+      newpassword1,
+      newpassword2
+    };
+
     // 비밀번호 유효성 검사
     if (newpassword1.trim() === '' || newpassword2.trim() === '') {
       setError('비밀번호를 입력해주세요.');
@@ -31,7 +36,7 @@ const ResetPwd: React.FC = () => {
     }
 
     try {
-      const responseData = await resetPwd(accessToken, newpassword1, newpassword2);
+      const responseData = await resetPwd(accessToken, data);
 
       console.log('비밀번호 변경 성공:', responseData);
       alert('비밀번호가 성공적으로 변경되었습니다.');
@@ -71,7 +76,7 @@ const ResetPwd: React.FC = () => {
           required
         />
         {error && <div className="error-message">{error}</div>}
-        <button type="submit">변경하기</button>
+        <button id="auth-btn" type="submit">변경하기</button>
       </form>
     </AuthForm>
   );
