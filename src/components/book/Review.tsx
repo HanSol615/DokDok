@@ -1,7 +1,7 @@
 import styled from "styled-components";
 import { BookDetail, BookReview } from "../../models/model";
 import Button from "../common/Button";
-import { useEffect, useState } from "react";
+import { useState } from "react";
 import { useBook } from "../../hooks/useBook";
 
 interface Props {
@@ -98,7 +98,6 @@ const ReviewStyle = styled.div`
     display: flex;
     flex-direction: column;
     gap: 2rem;
-    max-width: 56.25rem;
     padding-bottom: 2rem;
     border-bottom: 2px solid #d4d4d4b3;
 
