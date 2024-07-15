@@ -5,6 +5,7 @@ const baseUrl = 'http://localhost:8888'; // 로컬 서버
 
 const axiosInstance = axios.create({
   baseURL: baseUrl,
+  withCredentials: true,
   headers: {
     'Content-Type': 'application/json',
   },

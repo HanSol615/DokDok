@@ -35,6 +35,26 @@ export const resetPwd = async (accessToken: string, resetPwdData: ResetPwdData) 
   }
 };
 
+// 로그아웃 요청
+export const logout = async (accessToken: string) => {
+  const url = '/auth/logout';
+  const headers = {
+    'Authorization': `${accessToken}`,
+  };
+
+  try {
+    const response = await axiosInstance.post(url, {}, { headers });
+    return response.data;
+  } catch (error: any) {
+    if (error.response) {
+      console.error('Logout error response:', error.response);
+    } else {
+      console.error('Logout error:', error);
+    }
+    throw error;
+  }
+};
+
 interface UserData {
   email: string;
   password1: string;
@@ -55,5 +75,6 @@ interface ResetPwdData {
 export default {
   join,
   login,
-  resetPwd,
+  logout,
+  resetPwd
 };

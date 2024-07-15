@@ -1,9 +1,12 @@
 import styled from "styled-components";
 import { Outlet } from "react-router-dom";
 import { useNavigate } from 'react-router-dom';
+import useTokenManager from '../hooks/useTokenManager';
+import Auth from '../api/Auth';
 
 export default function Home() {
     const navigate = useNavigate();
+    const { hasAccessToken } = useTokenManager();
 
     const handleNavigateToMyBooks = () => {
         navigate('/myBooks');
@@ -20,6 +23,27 @@ export default function Home() {
     const handleNavigateToLogin = () => {
         navigate('/auth/login');
     };
+
+    const handleLogout = async () => {
+        const confirmLogout = window.confirm('로그아웃 하시겠습니까?');
+        if (confirmLogout) {
+            const accessToken = localStorage.getItem('accessToken');
+            if (!accessToken) {
+                alert('로그아웃할 수 없습니다. 사용자가 로그인하지 않았습니다.');
+                window.location.reload();
+                return;
+            }
+    
+            await Auth.logout(accessToken);
+            localStorage.clear();
+            navigate('/auth/login');
+        }
+    };
+    
+    
+    
+    
+    const isLoggedIn = hasAccessToken();
 
     return (
         <HomeStyle>
@@ -55,12 +79,15 @@ export default function Home() {
                         <li>
                             <p onClick={handleNavigateToDokDokCalendar}>독독 캘린더</p>
                         </li>
-                        
                     </ul>
                 </nav>
                 <div>
                     <p onClick={handleNavigateToJoin}>회원 가입</p>
-                    <p onClick={handleNavigateToLogin}>로그인</p>
+                    {isLoggedIn ? (
+                        <p onClick={handleLogout}>로그아웃</p>
+                    ) : (
+                        <p onClick={handleNavigateToLogin}>로그인</p>
+                    )}
                 </div>
                 {/* <img src={logo2} alt="DokDok" /> */}
             </div>
@@ -69,7 +96,7 @@ export default function Home() {
             </div>
         </HomeStyle>
     );
-};
+}
 
 const HomeStyle = styled.div`
     display: flex;
