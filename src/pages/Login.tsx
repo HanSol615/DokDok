@@ -2,9 +2,8 @@ import React, { useState } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 import AuthForm from '../components/Auth/AuthForm';
 import AuthInput from '../components/Auth/AuthInput';
-import '../components/Auth/AuthForm.css';
 import logoImg from '../assets/logoImg/logo1.jpg'
-import { login } from '../api/Auth'; // login 함수 가져오기
+import { login } from '../api/Auth';
 import { styled } from 'styled-components';
 
 const Login: React.FC = () => {
@@ -31,7 +30,7 @@ const Login: React.FC = () => {
       // 로그인 성공 후 토큰 저장
       localStorage.setItem('accessToken', responseData.accessToken);
       // refreshToken을 cookie에 저장
-      document.cookie = `refreshToken=${responseData.refreshToken}; Secure; HttpOnly`;
+      // document.cookie = `refreshToken=${responseData.refreshToken}; Secure; HttpOnly`;
 
       // 로그인 성공 후 홈페이지로 이동
       navigate('/mybooks');
@@ -72,7 +71,7 @@ const Login: React.FC = () => {
             <Link to="/auth/resetPwd">비밀번호 변경</Link>
         </div>
         {error && <div className="error-message">{error}</div>}
-        <button type="submit">로그인</button>
+        <button id="auth-btn" type="submit">로그인</button>
       </form>
       </LoginStyle>
     </AuthForm>
