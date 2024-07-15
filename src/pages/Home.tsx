@@ -1,12 +1,12 @@
 import styled from "styled-components";
-import { Outlet } from "react-router-dom";
-import { useNavigate } from 'react-router-dom';
+import { Outlet, useNavigate } from "react-router-dom";
+import useLogout from '../hooks/useLogout';
 import useTokenManager from '../hooks/useTokenManager';
-import Auth from '../api/Auth';
 
 export default function Home() {
     const navigate = useNavigate();
     const { hasAccessToken } = useTokenManager();
+    const handleLogout = useLogout();
 
     const handleNavigateToMyBooks = () => {
         navigate('/myBooks');
@@ -24,25 +24,6 @@ export default function Home() {
         navigate('/auth/login');
     };
 
-    const handleLogout = async () => {
-        const confirmLogout = window.confirm('로그아웃 하시겠습니까?');
-        if (confirmLogout) {
-            const accessToken = localStorage.getItem('accessToken');
-            if (!accessToken) {
-                alert('로그아웃할 수 없습니다. 사용자가 로그인하지 않았습니다.');
-                window.location.reload();
-                return;
-            }
-    
-            await Auth.logout(accessToken);
-            localStorage.clear();
-            navigate('/auth/login');
-        }
-    };
-    
-    
-    
-    
     const isLoggedIn = hasAccessToken();
 
     return (
@@ -89,7 +70,6 @@ export default function Home() {
                         <p onClick={handleNavigateToLogin}>로그인</p>
                     )}
                 </div>
-                {/* <img src={logo2} alt="DokDok" /> */}
             </div>
             <div id="detail">
                 <Outlet />
