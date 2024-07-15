@@ -3,6 +3,7 @@ import { BookDetail, BookRemind } from "../../models/model";
 import Button from "../common/Button";
 import { useState } from "react";
 import { useBook } from "../../hooks/useBook";
+import RemindItem from "./RemindItem";
 
 interface Props {
     bookDetail: BookDetail;
@@ -11,26 +12,20 @@ interface Props {
 
 const Remind = ({ bookDetail, id }: Props) => {
     const [remindText, setRemindText] = useState<string>('');
-    const {addRemind} = useBook(id)
-
-    const handleRemindSubmit = () => {
-        const body: BookRemind = {
-            isbn: id,
-            context: remindText,
-        };
-
-        addRemind(body);
-        setRemindText('')
-    };
+    const { reminds, addRemind } = useBook(id)
 
     return (
         <RemindStyle>
             <h2>인상깊은 구절</h2>
             <textarea value={remindText} onChange={(e) => setRemindText(e.target.value)} />
-            <Button size="medium" scheme="primary" onClick={handleRemindSubmit}>
+            <Button size="medium" scheme="primary" onClick={() => addRemind(id, remindText)}>
                 등록하기
             </Button>
-
+            <div>
+                {reminds.map((remind, index) => (
+                    <RemindItem key={index} context={remind} id={id} index={index} />
+                ))}
+            </div>
         </RemindStyle>
     )
 };
