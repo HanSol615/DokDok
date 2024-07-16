@@ -1,13 +1,15 @@
+// src/pages/Home.tsx
+
 import styled from "styled-components";
 import { Outlet, useNavigate } from "react-router-dom";
-import useLogout from '../hooks/useLogout';
+import useAuth from '../hooks/useAuth';
 import useTokenManager from '../hooks/useTokenManager';
 
 export default function Home() {
     const navigate = useNavigate();
     const { hasAccessToken } = useTokenManager();
-    const handleLogout = useLogout();
-
+    const { handleLogout, handleCancelAccount } = useAuth();
+    
     const handleNavigateToMyBooks = () => {
         navigate('/myBooks');
     };
@@ -63,9 +65,13 @@ export default function Home() {
                     </ul>
                 </nav>
                 <div>
-                    <p onClick={handleNavigateToJoin}>회원 가입</p>
                     {isLoggedIn ? (
                         <p onClick={handleLogout}>로그아웃</p>
+                    ) : (
+                        <p onClick={handleNavigateToJoin}>회원가입</p>
+                    )}
+                    {isLoggedIn ? (
+                        <p onClick={handleCancelAccount}>회원 탈퇴</p>
                     ) : (
                         <p onClick={handleNavigateToLogin}>로그인</p>
                     )}

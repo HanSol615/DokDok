@@ -46,11 +46,21 @@ export const logout = async (accessToken: string) => {
     const response = await axiosInstance.post(url, {}, { headers });
     return response.data;
   } catch (error: any) {
-    if (error.response) {
-      console.error('Logout error response:', error.response);
-    } else {
-      console.error('Logout error:', error);
-    }
+    throw error;
+  }
+};
+
+// 회원 탈퇴 요청
+export const cancelAccount = async (accessToken: string) => {
+  const url = '/auth/cancelAccount';
+  const headers = {
+    'Authorization': `${accessToken}`,
+  };
+
+  try {
+    const response = await axiosInstance.delete(url, { headers });
+    return response.data;
+  } catch (error: any) {
     throw error;
   }
 };
@@ -76,5 +86,6 @@ export default {
   join,
   login,
   logout,
-  resetPwd
+  resetPwd,
+  cancelAccount,
 };
