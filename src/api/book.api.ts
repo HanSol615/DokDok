@@ -18,7 +18,7 @@ export const postBookRemind = async (body: BookRemind) => {
 };
 
 export const deleteBook = async (isbn: string) => {
-    const response = await httpClient.delete('/book/deletebook', { data: { isbn: isbn } });
+    const response = await httpClient.delete('/book/deletebook', { data: { isbn } });
     return response.data;
 };
 
