@@ -10,11 +10,13 @@ import BookDetail from './pages/BookDetail';
 import { ThemeProvider } from 'styled-components';
 import { theme } from './style/theme';
 import SearchResults from './pages/SearchResults';
+import ErrorPage from './pages/Error';
 
 const router = createBrowserRouter([
   {
     path: '/',
     element: <Home />,
+    errorElement: <ErrorPage />,
     children: [
       {
         index: true,
