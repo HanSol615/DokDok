@@ -2,11 +2,31 @@
 
 import styled from "styled-components";
 import { Outlet, useNavigate } from "react-router-dom";
+import { useBookSearch } from "../hooks/useBookSearch";
+import { useState } from "react";
 import useAuth from '../hooks/useAuth';
 import useTokenManager from '../hooks/useTokenManager';
 
 export default function Home() {
     const navigate = useNavigate();
+    const [query, setQuery] = useState<string>("");
+    const { searchResults, loading, error } = useBookSearch(query);
+
+    const handleSearchSubmit = (event: React.FormEvent<HTMLFormElement>) => {
+        event.preventDefault();
+        setQuery('');
+        navigate(`/search?q=${query}`);
+    };
+
+    const handleNewButtonClick = () => {
+        setQuery('');
+        navigate(`/search?q=${query}`);
+    };
+
+    const handleInputChange = (event: React.ChangeEvent<HTMLInputElement>) => {
+        setQuery(event.target.value);
+    };
+
     const { hasAccessToken } = useTokenManager();
     const { handleLogout, handleCancelAccount } = useAuth();
     
@@ -36,13 +56,15 @@ export default function Home() {
         <HomeStyle>
             <div id="sidebar">
                 <div>
-                    <form id="search-form" role="search">
+                    <form id="search-form" role="search" onSubmit={handleSearchSubmit}>
                         <input
                             id="q"
                             aria-label="Search contacts"
                             placeholder="Search"
                             type="search"
                             name="q"
+                            value={query}
+                            onChange={handleInputChange}
                         />
                         <div
                             id="search-spinner"
@@ -54,9 +76,7 @@ export default function Home() {
                             aria-live="polite"
                         ></div>
                     </form>
-                    <form method="post">
-                        <button type="submit">New</button>
-                    </form>
+                    <button onClick={handleNewButtonClick}>검색</button>
                 </div>
                 <nav>
                     <ul>
@@ -84,7 +104,7 @@ export default function Home() {
                 </div>
             </div>
             <div id="detail">
-                <Outlet />
+                <Outlet context={{ searchResults, loading, error }}/>
             </div>
         </HomeStyle>
     );
@@ -92,14 +112,17 @@ export default function Home() {
 
 const HomeStyle = styled.div`
     display: flex;
-    height: 100vh;
+    width: 100vw;
+    max-width: 100%;
+    min-height: 100vh;
+    height: auto;
 
     #sidebar {
-    width: 22rem;
-    background-color: #f7f7f7;
-    border-right: solid 1px #e3e3e3;
-    display: flex;
-    flex-direction: column;
+        width: 22rem;
+        background-color: #CAF0F8;
+        border-right: solid 1px #e3e3e3;
+        display: flex;
+        flex-direction: column;
     }
 
     #sidebar>* {
@@ -129,10 +152,10 @@ const HomeStyle = styled.div`
     #sidebar>div {
         display: flex;
         align-items: center;
+        justify-content: space-between;
         gap: 0.5rem;
-        padding-top: 1rem;
-        padding-bottom: 1rem;
-        border-bottom: 1px solid #e3e3e3;
+        padding: 1.1rem;
+        border-bottom: 1px solid #b3b3b37d;
     }
 
     #sidebar>div form {
@@ -151,6 +174,17 @@ const HomeStyle = styled.div`
 
     #sidebar>div form input[type="search"].loading {
         background-image: none;
+    }
+
+    #sidebar>div button {
+        background-color: #03045E;
+        border-width: 1px;
+        border-color: #b3b3b37d;
+        border-radius: 8px;
+        color: #f0f0f0;
+        font-size: 1.15rem;
+        font-weight: 700;
+        padding: 0.5rem 1.2rem;
     }
 
     #search-spinner {
@@ -200,7 +234,7 @@ const HomeStyle = styled.div`
     }   
 
     #sidebar nav p:hover {
-        background: #e3e3e3;
+        background: #ADE8F4;
     }
 
     #sidebar img {

@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import AuthForm from '../components/Auth/AuthForm';
 import AuthInput from '../components/Auth/AuthInput';
-import { join } from '../api/Auth'; // signup 함수 가져오기
+import { join } from '../api/auth.api'; // signup 함수 가져오기
 
 const Join: React.FC = () => {
   const [email, setEmail] = useState('');

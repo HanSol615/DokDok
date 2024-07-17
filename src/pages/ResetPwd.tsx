@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import AuthForm from '../components/Auth/AuthForm';
 import AuthInput from '../components/Auth/AuthInput';
 import '../components/Auth/AuthForm.css';
-import { resetPwd } from '../api/Auth';
+import { resetPwd } from '../api/auth.api';
 import { useNavigate } from 'react-router-dom';
 
 const ResetPwd: React.FC = () => {

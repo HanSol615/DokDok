@@ -1,5 +1,5 @@
 import { useState, useEffect } from 'react';
-import { dokdokCalendar } from '../api/Home';
+import { dokdokCalendar } from '../api/calendar.api';
 import { Book } from '../models/book';
 import useTokenManager from '../hooks/useTokenManager';
 

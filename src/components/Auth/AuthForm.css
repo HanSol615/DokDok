@@ -44,8 +44,8 @@
 }
 
 #auth-btn[type="submit"] {
-  background-color: #03045E; /* 짙은 파란색 */
+  background-color: #03045E;
   color: white;
   padding: 10px 20px;
-  margin-top: 20px; /* 제출 버튼과 카드 아래 간격 */
+  margin-top: 20px;
 }

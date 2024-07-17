@@ -3,7 +3,7 @@ import { Link, useNavigate } from 'react-router-dom';
 import AuthForm from '../components/Auth/AuthForm';
 import AuthInput from '../components/Auth/AuthInput';
 import logoImg from '../assets/logoImg/logo1.jpg'
-import { login } from '../api/Auth';
+import { login } from '../api/auth.api';
 import { styled } from 'styled-components';
 
 const Login: React.FC = () => {
@@ -27,12 +27,8 @@ const Login: React.FC = () => {
       console.log('로그인 성공:', responseData);
       alert(`환영합니다, ${responseData.nickname}님!`);
 
-      // 로그인 성공 후 토큰 저장
       localStorage.setItem('accessToken', responseData.accessToken);
-      // refreshToken을 cookie에 저장
-      // document.cookie = `refreshToken=${responseData.refreshToken}; Secure; HttpOnly`;
 
-      // 로그인 성공 후 홈페이지로 이동
       navigate('/mybooks');
 
     } catch (error: any) {
@@ -82,5 +78,5 @@ export default Login;
 const LoginStyle = styled.div`
     display: flex;
     align-items: center;
-    gap: 80px;
+    gap: 30px;
 `;

@@ -1,9 +1,9 @@
-import axiosInstance from './Axios';
+import { httpClient } from './http';
 
 // 회원가입 요청
 export const join = async (userData: UserData) => {
   try {
-    const response = await axiosInstance.post('/auth/join', userData);
+    const response = await httpClient.post('/auth/join', userData);
     return response.data;
   } catch (error) {
     throw error;
@@ -13,7 +13,7 @@ export const join = async (userData: UserData) => {
 // 로그인 요청
 export const login = async (loginData: LoginData) => {
   try {
-    const response = await axiosInstance.post('/auth/login', loginData);
+    const response = await httpClient.post('/auth/login', loginData);
     return response.data;
   } catch (error) {
     throw error;
@@ -28,7 +28,7 @@ export const resetPwd = async (accessToken: string, resetPwdData: ResetPwdData) 
   };
 
   try {
-    const response = await axiosInstance.patch(url, resetPwdData, { headers });
+    const response = await httpClient.patch(url, resetPwdData, { headers });
     return response.data;
   } catch (error) {
     throw error;
@@ -43,7 +43,7 @@ export const logout = async (accessToken: string) => {
   };
 
   try {
-    const response = await axiosInstance.post(url, {}, { headers });
+    const response = await httpClient.post(url, {}, { headers });
     return response.data;
   } catch (error: any) {
     throw error;
@@ -58,7 +58,7 @@ export const cancelAccount = async (accessToken: string) => {
   };
 
   try {
-    const response = await axiosInstance.delete(url, { headers });
+    const response = await httpClient.delete(url, { headers });
     return response.data;
   } catch (error: any) {
     throw error;
