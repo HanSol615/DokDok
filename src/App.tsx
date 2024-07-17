@@ -7,11 +7,16 @@ import Login from './pages/Login';
 import Join from './pages/Join';
 import ResetPwd from './pages/ResetPwd';
 import BookDetail from './pages/BookDetail';
+import { ThemeProvider } from 'styled-components';
+import { theme } from './style/theme';
+import SearchResults from './pages/SearchResults';
+import ErrorPage from './pages/Error';
 
 const router = createBrowserRouter([
   {
     path: '/',
     element: <Home />,
+    errorElement: <ErrorPage />,
     children: [
       {
         index: true,
@@ -22,7 +27,11 @@ const router = createBrowserRouter([
         element: <MyBooks />,
       },
       {
-        path: 'book/:id',
+        path: 'search',
+        element: <SearchResults />,
+      },
+      {
+        path: 'books/:id',
         element: <BookDetail />
       },
       {
@@ -47,10 +56,10 @@ const router = createBrowserRouter([
 
 const App = () => {
   return (
-    <>
+    <ThemeProvider theme={theme}>
       <GlobalStyle />
       <RouterProvider router={router} />
-    </>
+    </ThemeProvider>
   );
 };
 
