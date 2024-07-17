@@ -26,6 +26,10 @@ export default function Home() {
         navigate('/auth/login');
     };
 
+    const handleNavigateToResetPassword = () => {
+        navigate('/auth/resetPwd');
+    };
+
     const isLoggedIn = hasAccessToken();
 
     return (
@@ -64,16 +68,18 @@ export default function Home() {
                         </li>
                     </ul>
                 </nav>
-                <div>
+                <div id="auth-container">
                     {isLoggedIn ? (
-                        <p onClick={handleLogout}>로그아웃</p>
+                        <>
+                            <p onClick={handleLogout}>로그아웃</p>
+                            <p onClick={handleNavigateToResetPassword}>비밀번호 변경</p>
+                            <p onClick={handleCancelAccount}>회원 탈퇴</p>
+                        </>
                     ) : (
-                        <p onClick={handleNavigateToJoin}>회원가입</p>
-                    )}
-                    {isLoggedIn ? (
-                        <p onClick={handleCancelAccount}>회원 탈퇴</p>
-                    ) : (
-                        <p onClick={handleNavigateToLogin}>로그인</p>
+                        <>
+                            <p onClick={handleNavigateToJoin}>회원가입</p>
+                            <p onClick={handleNavigateToLogin}>로그인</p>
+                        </>
                     )}
                 </div>
             </div>
@@ -205,5 +211,15 @@ const HomeStyle = styled.div`
     #detail {
         flex: 1;
         margin: 12px 20px;
+    }
+
+    #auth-container {
+    display: flex;
+    flex-direction: column; /* 세로로 배치 */
+    align-items: flex-start !important; /* 왼쪽 정렬 */
+}
+
+    #auth-container p {
+        margin: 0;
     }
 `

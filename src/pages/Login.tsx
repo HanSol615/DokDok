@@ -68,7 +68,6 @@ const Login: React.FC = () => {
         />
         <div className="link-container">
             <Link to="/auth/join">회원가입</Link>
-            <Link to="/auth/resetPwd">비밀번호 변경</Link>
         </div>
         {error && <div className="error-message">{error}</div>}
         <button id="auth-btn" type="submit">로그인</button>
