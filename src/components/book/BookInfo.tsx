@@ -28,7 +28,7 @@ const BookInfo = ({ bookDetail, id }: Props) => {
                             </div>
                             <div>
                                 <h4>완독 날짜</h4>
-                                <p>2024-07-20</p>
+                                <p>{bookDetail?.bookEndDate}</p>
                             </div>
                         </div>
                         <Button className="deleteButton" size="small" scheme="normal" onClick={() => removeBook(id)}>

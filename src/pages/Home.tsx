@@ -1,7 +1,11 @@
+// src/pages/Home.tsx
+
 import styled from "styled-components";
 import { Outlet, useNavigate } from "react-router-dom";
 import { useBookSearch } from "../hooks/useBookSearch";
 import { useState } from "react";
+import useAuth from '../hooks/useAuth';
+import useTokenManager from '../hooks/useTokenManager';
 
 export default function Home() {
     const navigate = useNavigate();
@@ -23,6 +27,9 @@ export default function Home() {
         setQuery(event.target.value);
     };
 
+    const { hasAccessToken } = useTokenManager();
+    const { handleLogout, handleCancelAccount } = useAuth();
+    
     const handleNavigateToMyBooks = () => {
         navigate('/myBooks');
     };
@@ -38,6 +45,12 @@ export default function Home() {
     const handleNavigateToLogin = () => {
         navigate('/auth/login');
     };
+
+    const handleNavigateToResetPassword = () => {
+        navigate('/auth/resetPwd');
+    };
+
+    const isLoggedIn = hasAccessToken();
 
     return (
         <HomeStyle>
@@ -75,18 +88,27 @@ export default function Home() {
                         </li>
                     </ul>
                 </nav>
-                <div>
-                    <p onClick={handleNavigateToJoin}>회원 가입</p>
-                    <p onClick={handleNavigateToLogin}>로그인</p>
+                <div id="auth-container">
+                    {isLoggedIn ? (
+                        <>
+                            <p onClick={handleLogout}>로그아웃</p>
+                            <p onClick={handleNavigateToResetPassword}>비밀번호 변경</p>
+                            <p onClick={handleCancelAccount}>회원 탈퇴</p>
+                        </>
+                    ) : (
+                        <>
+                            <p onClick={handleNavigateToJoin}>회원가입</p>
+                            <p onClick={handleNavigateToLogin}>로그인</p>
+                        </>
+                    )}
                 </div>
-                {/* <img src={logo2} alt="DokDok" /> */}
             </div>
             <div id="detail">
                 <Outlet context={{ searchResults, loading, error }}/>
             </div>
         </HomeStyle>
     );
-};
+}
 
 const HomeStyle = styled.div`
     display: flex;
@@ -222,7 +244,16 @@ const HomeStyle = styled.div`
 
     #detail {
         flex: 1;
-        margin: 50px 90px;
-        box-sizing: border-box;
+        margin: 12px 20px;
+    }
+
+    #auth-container {
+    display: flex;
+    flex-direction: column; /* 세로로 배치 */
+    align-items: flex-start !important; /* 왼쪽 정렬 */
+}
+
+    #auth-container p {
+        margin: 0;
     }
 `

@@ -2,12 +2,19 @@ import React, { useState } from 'react';
 import AuthForm from '../components/Auth/AuthForm';
 import AuthInput from '../components/Auth/AuthInput';
 import '../components/Auth/AuthForm.css';
-import { resetPwd } from '../api/Auth';
+import { resetPwd } from '../api/auth.api';
+import { useNavigate } from 'react-router-dom';
 
 const ResetPwd: React.FC = () => {
   const [newpassword1, setNewpassword1] = useState('');
   const [newpassword2, setNewpassword2] = useState('');
   const [error, setError] = useState<string | null>(null);
+
+  const navigate = useNavigate();
+
+  const handleNavigateToLogin = () => {
+    navigate('/auth/login');
+  };
 
   const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
@@ -40,6 +47,7 @@ const ResetPwd: React.FC = () => {
 
       console.log('비밀번호 변경 성공:', responseData);
       alert('비밀번호가 성공적으로 변경되었습니다.');
+      navigate('/auth/login');
 
       // 폼 초기화
       setNewpassword1('');
