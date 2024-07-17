@@ -21,7 +21,7 @@ export const createClient = (config?: AxiosRequestConfig) => {
         (error) => {
             if (error.response && error.response.status === 401) {
                 removeToken();
-                window.location.href = 'auth/login';
+                window.location.href = '/auth/login';
             }
             return Promise.reject(error);
         }
