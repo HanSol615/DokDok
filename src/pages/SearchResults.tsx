@@ -19,7 +19,7 @@ const SearchResults = () => {
     const query = searchParams.get('q');
     
     if (loading) {
-        return <p>Loading...</p>;
+        return <h2>Loading...</h2>;
     }
 
     if (error) {
@@ -34,7 +34,7 @@ const SearchResults = () => {
     return (
         <div>
             <h1>"{query}" 검색 결과</h1>
-            <Booklist books={searchResults.books} isFavoriteTab={true}/>
+            <Booklist books={searchResults.books} isFavoriteTab={true} messageType="검색결과" />
         </div>
     );
 };

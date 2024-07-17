@@ -38,6 +38,7 @@ export const renderStars = (score: number) => {
 const BookItem = ({ book, isFavoriteTab }: Props) => {
     const [likeStatus, setLikeStatus] = useState(book.likeStatus);
     const truncatedTitle = truncateText(book.title, MAX_TITLE_LENGTH);
+    const truncatedAuthor = truncateText(book.author, MAX_TITLE_LENGTH);
     const { addFavorite, addReading, addFinished } = useBooks();
 
     const handleFavoriteClick = (event: React.MouseEvent<SVGElement>) => {
@@ -67,22 +68,22 @@ const BookItem = ({ book, isFavoriteTab }: Props) => {
                 <div className="content">
                     <div className="title-author">
                         <h3 className="title">{truncatedTitle}</h3>
-                        <h4 className="author">{book.author}</h4>
+                        <h4 className="author">{truncatedAuthor}</h4>
                     </div>
                     <div className="buttons">
-                        {isFavoriteTab ? (
-                            <Button size='small' scheme='primary' onClick={handleReadingStartClick}>
-                                읽기 시작
-                            </Button>
+                        {book.readStatus ? (
+                            <div className="rating">
+                                {renderStars(book.score ?? 0)}
+                            </div>
                         ) : (
-                            book.readStatus === false ? (
+                            isFavoriteTab ? (
+                                <Button size='small' scheme='primary' onClick={handleReadingStartClick}>
+                                    읽기 시작
+                                </Button>
+                            ) : (
                                 <Button size='small' scheme='primary' onClick={handleFinishedClick}>
                                     읽기 완료
                                 </Button>
-                            ) : (
-                                <div className="rating">
-                                    {renderStars(book.score ?? 0)}
-                                </div>
                             )
                         )}
                         {likeStatus ? (
@@ -101,6 +102,7 @@ const BookItemStyle = styled.div`
     display: flex;
     flex-direction: row;
     gap: 2rem;
+    width: 450px;
     min-height: 15rem;
     box-shadow: 0 0 4px rgba(0, 0, 0, 0.2);
     border-radius: 10px;
@@ -145,6 +147,8 @@ const BookItemStyle = styled.div`
             margin-top: 0.4rem;
             .filled-star {
                 fill: yellow;
+                stroke: black;
+                stroke-width: 5px;
             }
 
             .empty-star {

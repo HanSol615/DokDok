@@ -6,18 +6,17 @@ import { useBooks } from "../hooks/useBooks";
 const MyBooks = () => {
     const { favoriteBooks, favoriteBooksCount, readingBooks, readingBooksCount, finishedBooks, finishedBooksCount } = useBooks();
 
-    console.log('즐겨찾기 책', favoriteBooks)
     return (
         <MyBooksStyle>
             <Tabs>
                 <Tab title="✨ 즐겨찾기">
-                    <Booklist books={favoriteBooks} count={favoriteBooksCount} isFavoriteTab={true}/>
+                    <Booklist books={favoriteBooks} count={favoriteBooksCount} messageType="즐겨찾기" isFavoriteTab={true}/>
                 </Tab>
                 <Tab title="📖 읽는 중">
-                    <Booklist books={readingBooks} count={readingBooksCount}/>
+                    <Booklist books={readingBooks} count={readingBooksCount} messageType="읽는중" />
                 </Tab>
                 <Tab title="📚 읽은 책">
-                    <Booklist books={finishedBooks} count={finishedBooksCount}/>
+                    <Booklist books={finishedBooks} count={finishedBooksCount} messageType="완독" />
                 </Tab>
             </Tabs>
         </MyBooksStyle>

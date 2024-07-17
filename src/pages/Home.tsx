@@ -96,11 +96,11 @@ const HomeStyle = styled.div`
     height: auto;
 
     #sidebar {
-    width: 22rem;
-    background-color: #CAF0F8;
-    border-right: solid 1px #e3e3e3;
-    display: flex;
-    flex-direction: column;
+        width: 22rem;
+        background-color: #CAF0F8;
+        border-right: solid 1px #e3e3e3;
+        display: flex;
+        flex-direction: column;
     }
 
     #sidebar>* {
