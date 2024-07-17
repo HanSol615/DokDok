@@ -34,7 +34,7 @@ const RemindStyle = styled.div`
     display: flex;
     flex-direction: column;
     gap: 2rem;
-    max-width: 56.25rem;
+    width: 100%;
 
     h2 {
         margin: 0;

@@ -100,6 +100,7 @@ const ReviewStyle = styled.div`
     gap: 2rem;
     padding-bottom: 2rem;
     border-bottom: 2px solid #d4d4d4b3;
+    width: 100%;
 
     h2 {
         margin: 0;

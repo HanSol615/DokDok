@@ -25,6 +25,7 @@ const ButtonStyle = styled.button<Omit<Props, "children">> `
     cursor: ${({ disabled }) => (disabled ? 'none' : 'pointer')};
     border: none;
     border-radius: 5px;
+    max-height: 3rem;
 `
 
 export default Button;

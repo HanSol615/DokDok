@@ -16,7 +16,7 @@ const BookDetail = () => {
     return (
         <BookDetailStyle>
             <div className="container">
-                <BookInfo bookDetail={bookDetail!}></BookInfo>
+                <BookInfo bookDetail={bookDetail!} id={id!}></BookInfo>
                 <Review bookDetail={bookDetail!} id={id!}></Review>
                 <Remind bookDetail={bookDetail!} id={id!}></Remind>
             </div>
@@ -34,6 +34,9 @@ const BookDetailStyle = styled.div`
         display: flex;
         flex-direction: column;
         gap: 3rem;
+        justify-content: center;
+        align-items: center;
+        width: 900px;
     }
 `
 
